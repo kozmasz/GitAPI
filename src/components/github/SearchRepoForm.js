@@ -1,43 +1,49 @@
 import React, { Component } from 'react';
 import logo from "../../gitLogo.svg";
-import GitHubAPI from '../../api/github';
+import {Link} from "react-router-dom";
+import {FormGroup, FormControl, ControlLabel, Row, InputGroup} from 'react-bootstrap';
+import Col from "react-bootstrap/es/Col";
+// import InputGroupAddon from "react-bootstrap/es/InputGroupAddon";
+// import InputGroupButton from "react-bootstrap/es/InputGroupButton";
 
 class SearchRepoForm extends Component {
 
-    // state = { repos: [] }
+    state = { username: null }
 
-    gitLogoTag = () => {
-        return document.getElementById('git-logo');
-    }
-
-    getRepos = event => {
-        event.preventDefault();
-        const userName = event.target[0].value;
-        this.gitLogoTag().className='App-logo-2';
-        GitHubAPI.get('/users/' + userName + '/repos')
-            .then(res => {
-                // state.repos = res.data;
-                console.log(res.data);
-                this.gitLogoTag().className='App-logo';
-            })
-            .catch(err => {
-                console.log(err.response);
-                this.gitLogoTag().className = 'App-logo';
-            });
+    setUsername = event => {
+        this.setState({username: event.target.value});
     }
 
     render() {
+
         return (
             <React.Fragment>
                 <img id="git-logo" src={logo} className="App-logo" alt="logo"/>
-                <p>GitHub</p>
 
-                <form onSubmit={this.getRepos}>
-                    <div className="form-group">
-                        <label htmlFor="userName">User name:</label>
-                        <input className="form-control" id="userName" placeholder="Enter username"/>
-                    </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                <form>
+                    <FormGroup>
+                        <ControlLabel>Your GitHub URL</ControlLabel>
+                        <Row>
+                            <Col lg={3}></Col>
+
+                            {/*<InputGroup>*/}
+                                {/*<InputGroup.Button>*/}
+                                    {/*<Button>Before</Button>*/}
+                                {/*</InputGroup.Button>*/}
+                                {/*<FormControl type="text" />*/}
+                            {/*</InputGroup>*/}
+
+                            <div className="input-group input-group-lg col-lg-6">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text" id="basic-addon3"></span>
+                                </div>
+                                <input type="text" onChange={this.setUsername} className="form-control" id="user-name" aria-describedby="inputGroup-sizing-lg" placeholder="username"/>
+                            </div>
+                        </Row>
+                    </FormGroup>
+                    <Link to={"/github/" + this.state.username}>
+                        <button type="submit" className="btn-lg btn-primary">Submit</button>
+                    </Link>
                 </form>
             </React.Fragment>
         )
