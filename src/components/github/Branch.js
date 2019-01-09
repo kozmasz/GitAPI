@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import GitHubAPI from "../../api/github";
 import gitLogo from "../../gitLogo.svg";
-import Tree from "./Tree";
 import Readme from "../../components/github/Readme"
-import GitNavTabs from './GitNavTabs';
+import classnames from 'classnames';
+import Tree from "./Tree";
+import CommitList from "./CommitList";
+import {Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from "reactstrap";
 
 class Branch extends Component{
 
@@ -15,7 +17,8 @@ class Branch extends Component{
         this.state = { branch: this.initBranch(),
             readme: {content: ''},
             isLoading: false,
-            error: null }
+            error: null,
+            activeTab: '1'}
     }
 
     initBranch = () => {
@@ -51,6 +54,14 @@ class Branch extends Component{
             });
     }
 
+    toggle = (tab) => {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
+    }
+
     render() {
         const {readme, branch, isLoading, error} = this.state;
 
@@ -70,14 +81,37 @@ class Branch extends Component{
         return (
             <div className="branch">
                 <h1>{this.repo + ' - ' + this.branch}</h1>
-                <div className="alert alert-info">
-                    <strong>Current commit ID:</strong> {branch.commit.sha}
-                    <br/>
-                    <strong>Current commit message:</strong> {branch.commit.commit.message}
-                    <br/>
-                    <strong>Committer:</strong> {branch.commit.commit.committer.name}
+                <div>
+                    <Nav tabs>
+                        <NavItem>
+                            <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1'); }}>
+                                Files
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2'); }}>
+                                Commits
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
+                    <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="1">
+                            <Row>
+                                <Col sm="12">
+                                    <Tree rootUrl={branch.commit.commit.tree.url}/>
+                                </Col>
+                            </Row>
+                        </TabPane>
+                        <TabPane tabId="2">
+                            <Row>
+                                <Col sm="12">
+                                    <CommitList username={this.username} branch={this.branch} repo={this.repo}/>
+                                </Col>
+                            </Row>
+                        </TabPane>
+                    </TabContent>
                 </div>
-                <GitNavTabs/>
+
                 <Readme content={readme.content} name={readme.name}/>
             </div>
         )

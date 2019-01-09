@@ -9,7 +9,7 @@ class Dir extends Component{
         const {elem} = this.props;
         return (
             <div className="line">
-                <img className="tree-icon" src={dir}/><span>&nbsp;{elem.path}</span>
+                <img className="tree-icon" src={dir}  alt="Dir"/><span>&nbsp;{elem.path}</span>
             </div>
         )
     }

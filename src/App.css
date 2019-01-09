@@ -17,15 +17,6 @@
   white-space: nowrap;
 }
 
-.App-header {
-  background-color: #383d41;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -38,15 +29,19 @@
   color: black;
 }
 
+.table-list-cell {
+  border: 1px solid #eaecef;
+  display: table-cell;
+  font-size: 12px;
+  position: relative;
+  vertical-align: top;
+}
+
 .welcome {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .branch {

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import logo from "../../gitLogo.svg";
 import {Link} from "react-router-dom";
-import {FormGroup, FormControl, ControlLabel, Row, InputGroup} from 'react-bootstrap';
-import Col from "react-bootstrap/es/Col";
-// import InputGroupAddon from "react-bootstrap/es/InputGroupAddon";
-// import InputGroupButton from "react-bootstrap/es/InputGroupButton";
+import {Form, FormGroup, Input, Row, Col, InputGroup, InputGroupAddon, Button} from 'reactstrap';
 
 class SearchRepoForm extends Component {
 
@@ -19,32 +16,23 @@ class SearchRepoForm extends Component {
         return (
             <React.Fragment>
                 <img id="git-logo" src={logo} className="App-logo" alt="logo"/>
-
-                <form>
+                <p>Your GitHub URL</p>
+                <Form>
                     <FormGroup>
-                        <ControlLabel>Your GitHub URL</ControlLabel>
                         <Row>
-                            <Col lg={3}></Col>
-
-                            {/*<InputGroup>*/}
-                                {/*<InputGroup.Button>*/}
-                                    {/*<Button>Before</Button>*/}
-                                {/*</InputGroup.Button>*/}
-                                {/*<FormControl type="text" />*/}
-                            {/*</InputGroup>*/}
-
-                            <div className="input-group input-group-lg col-lg-6">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon3"></span>
-                                </div>
-                                <input type="text" onChange={this.setUsername} className="form-control" id="user-name" aria-describedby="inputGroup-sizing-lg" placeholder="username"/>
-                            </div>
+                            <Col sm={3}></Col>
+                            <Col sm={6}>
+                                <InputGroup size="lg">
+                                    <InputGroupAddon addonType="prepend">https://github.com/</InputGroupAddon>
+                                    <Input type="text" onChange={this.setUsername} className="form-control" id="user-name" aria-describedby="inputGroup-sizing-lg" placeholder="username" />
+                                </InputGroup>
+                            </Col>
                         </Row>
                     </FormGroup>
                     <Link to={"/github/" + this.state.username}>
-                        <button type="submit" className="btn-lg btn-primary">Submit</button>
+                        <Button color="primary" size="lg">Submit</Button>
                     </Link>
-                </form>
+                </Form>
             </React.Fragment>
         )
     }

@@ -1,42 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <title>INSPINIA | GitHUB Page</title>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+
+  <link href="./js/" rel="stylesheet">
+  <link href="./font-awesome/css/font-awesome.css" rel="stylesheet">
+
+</head>
+
+<body class="">
+
+<div id="wrapper">
+
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav metismenu" id="side-menu">
+        <li class="nav-header">
+          GitHubAPI
+        </li>
+        <li>
+          <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+        </li>
+        <li>
+          <a href="/github"><i class="fa fa-search"></i> <span class="nav-label">Search</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row border-bottom">
+      <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+          <li>
+            <span class="m-r-sm text-muted welcome-message">Welcome to GitHubAPI.</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-sm-4">
+        <h2>GitHub API</h2>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li class="breadcrumb-item active">
+            <strong>Breadcrumb</strong>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="wrapper wrapper-content">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div id="root"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="float-right">
+        All right reserved.
+      </div>
+      <div>
+        <strong>Copyright</strong> West Company &copy; 2018Q4
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
 </html>

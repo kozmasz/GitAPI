@@ -9,7 +9,7 @@ class Readme extends Component{
         return (
             <div id='readme'>
                 <h1>{name}</h1>
-                <ReactMarkdown source={decodeURIComponent(escape(window.atob( content )))} />
+                <ReactMarkdown source={decodedContent} />
             </div>
         )
     }

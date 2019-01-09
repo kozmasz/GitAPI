@@ -3,7 +3,6 @@ import GitHubAPI from "../../api/github";
 import gitLogo from "../../gitLogo.svg";
 import File from '../../components/github/File'
 import Dir from '../../components/github/Dir'
-import {sortBy} from 'sugar'
 
 class Tree extends Component{
 
@@ -25,15 +24,19 @@ class Tree extends Component{
 
     getTree = () => {
         this.setState({tree: {tree: []}, error: null, isLoading: true});
-        GitHubAPI.get(this.state.path)
-            .then(res => {
-                res.data.tree.sort(this.compare);
-                this.setState({tree: res.data, isLoading: false});
-                console.log(res.data.tree)
-            })
-            .catch(error => {
-                this.setState({error, isLoading: false})
-            });
+        if (this.state.path.indexOf('undefined') === -1) {
+            GitHubAPI.get(this.state.path)
+                .then(res => {
+                    res.data.tree.sort(this.compare);
+                    this.setState({tree: res.data, isLoading: false});
+                    console.log(res.data.tree)
+                })
+                .catch(error => {
+                    this.setState({error, isLoading: false})
+                });
+        } else {
+            this.setState({isLoading: false})
+        }
     }
 
     compare = (a,b) => {
@@ -82,7 +85,7 @@ class Tree extends Component{
         }
 
         const treeDom = tree.tree.map(function (elem) {
-            const {FileComponent, handlerFunction} = elem.type == 'tree' ? {FileComponent: Dir, handlerFunction: self.openDir} : {FileComponent: File, handlerFunction: self.openFile};
+            const {FileComponent, handlerFunction} = elem.type === 'tree' ? {FileComponent: Dir, handlerFunction: self.openDir} : {FileComponent: File, handlerFunction: self.openFile};
             const path = document.createElement('a');
             path.href = elem.url;
 

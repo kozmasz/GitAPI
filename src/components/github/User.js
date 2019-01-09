@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import {ListGroup, ListGroupItem} from 'reactstrap';
+import Badge from "reactstrap/es/Badge";
 class GitProfile extends Component{
 
     render() {
@@ -13,16 +14,13 @@ class GitProfile extends Component{
                 <hr/>
                 <br/>
 
-                <ul className="list-group">
-                    <li className="list-group-item text-muted">Activity <i
-                        className="fa fa-dashboard fa-1x"></i></li>
-                    <li className="list-group-item text-right"><span
-                        className="pull-left"><strong>Repo count:</strong></span> {repoCount}
-                    </li>
-                    <li className="list-group-item text-right"><span
-                        className="pull-left"><strong>Languages:</strong></span> {languages}
-                    </li>
-                </ul>
+                <ListGroup>
+                    <ListGroupItem className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></ListGroupItem>
+                    <ListGroupItem className="justify-content-between"><span
+                        className="pull-left"><strong>Repo count:</strong></span> <Badge>{repoCount}</Badge></ListGroupItem>
+                    <ListGroupItem className="justify-content-between"><span
+                        className="pull-left"><strong>Languages:</strong></span> {languages}</ListGroupItem>
+                </ListGroup>
             </React.Fragment>
         )
     }

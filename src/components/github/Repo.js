@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
 
 class Repo extends Component{
     render() {
         const {repo} = this.props;
 
         return (
-            <div className="card text-center">
-                <div className="card-header">
-                    <div>{repo.name} - {repo.language}</div>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Clone URL</h5>
-                    <p className="card-text">{repo.clone_url}</p>
+            <Card>
+                <CardHeader>{repo.name} - {repo.language}</CardHeader>
+                <CardBody>
+                    <CardTitle>Clone URL</CardTitle>
+                    <CardText>{repo.clone_url}</CardText>
                     <Link to={"/github/" + repo.owner.login + "/" + repo.name + "/branches/master"}>
-                        <button type="submit" className="btn-lg btn-primary">Details</button>
+                        <Button color="primary" size="lg">Details</Button>
                     </Link>
-                </div>
-                <div className="card-footer text-muted">
-                    {repo.updated_at}
-                </div>
-            </div>
+                </CardBody>
+                <CardFooter>{repo.updated_at}</CardFooter>
+            </Card>
         )
     }
 }

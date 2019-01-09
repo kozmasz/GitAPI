@@ -3,9 +3,11 @@ import GitHubAPI from "../../api/github";
 import gitLogo from "../../gitLogo.svg";
 import User from '../../components/github/User'
 import RepoList from "./RepoList";
+import Container from "reactstrap/es/Container";
+import Row from "reactstrap/es/Row";
+import Col from "reactstrap/es/Col";
 
 class Profile extends Component{
-
 
     constructor(props) {
       super(props);
@@ -36,7 +38,7 @@ class Profile extends Component{
     languages = () => {
         const uniqLanguages = [];
         this.state.repos.forEach(function(repo) {
-            if (repo.language && uniqLanguages.indexOf(repo.language) == -1){
+            if (repo.language && uniqLanguages.indexOf(repo.language) === -1){
                 uniqLanguages.push(repo.language);
             }
         })
@@ -60,20 +62,22 @@ class Profile extends Component{
         }
 
         return (
-                <div className="container bootstrap snippet">
-                    <div className="row">
-                        <div className="col-sm-3"><h1>{this.title()}</h1></div>
-
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-3">
-                            <User avatarUrl={owner.avatar_url} repoCount={repos.length} languages={this.languages()}/>
-                        </div>
-                        <div className="col-sm-9 repositroies"><h1>Repositories</h1>
-                            <RepoList repos={repos}/>
-                        </div>
-                    </div>
-                </div>
+            <Container className="container bootstrap snippet">
+                <Row>
+                    <Col sm={3}>
+                        <h1>{this.title()}</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={3}>
+                        <User avatarUrl={owner.avatar_url} repoCount={repos.length} languages={this.languages()}/>
+                    </Col>
+                    <Col sm={9} className='repositories'>
+                        <h1>Repositories</h1>
+                        <RepoList repos={repos}/>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
