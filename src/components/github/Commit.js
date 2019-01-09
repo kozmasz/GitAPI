@@ -7,6 +7,7 @@ class Commit extends Component{
     constructor(props) {
         super(props);
         this.commit = this.props.commit;
+        this.parent = this.props.commit.parents[0];
     }
 
     date = () => {
@@ -25,6 +26,7 @@ class Commit extends Component{
                     <strong>{this.commit.commit.message}</strong> - {this.commit.sha}
                     <br/>
                     {this.commit.commit.committer.name} commited on {this.date()}
+                    {this.parent && <button className="btn btn-primary dim pull-right" type="button"><i className="fa fa-code"></i></button>}
                 </Col>
             </Row>
         )
