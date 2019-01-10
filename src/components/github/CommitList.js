@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GitHubAPI from "../../api/github";
+import GitHubAPI from "../../api/githubAPI";
 import Commit from "./Commit";
 
 class CommitList extends Component{
@@ -30,10 +30,11 @@ class CommitList extends Component{
 
     render() {
         const {commits} = this.state;
+        const self = this;
         const commitsDom = commits.map(function (commit) {
             return (
                 <div key={commit.sha}>
-                    <Commit commit={commit}/>
+                    <Commit username={self.username} repo={self.repo} commit={commit}/>
                 </div>)
         })
         return (

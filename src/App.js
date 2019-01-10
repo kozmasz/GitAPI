@@ -5,6 +5,7 @@ import Route from "react-router-dom/Route";
 import SearchRepoForm from "./components/github/SearchRepoForm";
 import Profile from "./components/github/Profile";
 import {BrowserRouter as Router} from "react-router-dom";
+import Diff from "./components/github/Diff";
 import Branch from "./components/github/Branch";
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
                           <Route path="/github" exact strict component={SearchRepoForm}/>
                           <Route path="/github/:username" exact strict component={Profile}/>
                           <Route path="/github/:username/:repo/branches/:branch" exact strict component={Branch}/>
-                          {/*<Route path="/github/:username/:repo/trees/:sha" exact strict component={Tree}/>*/}
+                          <Route path="/github/:username/:repo/compare/:parentSha/:currentSha" exact strict component={Diff}/>
                       </div>
                   </Router>
               </header>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GitHubAPI from "../../api/github";
+import GitHubAPI from "../../api/githubAPI";
 import gitLogo from "../../gitLogo.svg";
 import User from '../../components/github/User'
 import RepoList from "./RepoList";
