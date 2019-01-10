@@ -35,7 +35,6 @@ class Branch extends Component{
         GitHubAPI.get('/repos/' + this.username + '/' + this.repo + '/branches/' + this.branch)
             .then(res => {
                 this.setState({branch: res.data, isLoading: false});
-                console.log(res.data)
             })
             .catch(error => {
                 this.setState({error, isLoading: false})
@@ -47,7 +46,6 @@ class Branch extends Component{
         GitHubAPI.get('/repos/' + this.username + '/' + this.repo + '/readme')
             .then(res => {
                 this.setState({readme: res.data, isLoading: false});
-                console.log(res.data)
             })
             .catch(error => {
                 this.setState({error, isLoading: false})

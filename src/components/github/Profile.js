@@ -24,7 +24,6 @@ class Profile extends Component{
         GitHubAPI.get('/users/' + this.username + '/repos')
             .then(res => {
                 this.setState({repos: res.data, owner: res.data[0] && res.data[0].owner, isLoading: false});
-                console.log(res.data)
             })
             .catch(error => {
                 this.setState({error, isLoading: false})

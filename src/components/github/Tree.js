@@ -3,6 +3,8 @@ import GitHubAPI from "../../api/githubAPI";
 import gitLogo from "../../gitLogo.svg";
 import File from '../../components/github/File'
 import Dir from '../../components/github/Dir'
+import { Row, Col } from "reactstrap";
+import FileOpener from "./FileOpener";
 
 class Tree extends Component{
 
@@ -15,7 +17,8 @@ class Tree extends Component{
             pathes: [],
             tree: {tree: []},
             isLoading: false,
-            error: null }
+            error: null,
+            file: null}
     }
 
     componentDidMount() {
@@ -29,7 +32,6 @@ class Tree extends Component{
                 .then(res => {
                     res.data.tree.sort(this.compare);
                     this.setState({tree: res.data, isLoading: false});
-                    console.log(res.data.tree)
                 })
                 .catch(error => {
                     this.setState({error, isLoading: false})
@@ -62,8 +64,12 @@ class Tree extends Component{
         this.setState({path: (this.state.pathes[this.state.pathes.length-1] || this.state.rootPath)});
     }
 
-    openFile = (pathname) => {
-        console.log('File')
+    openFile = (file) => {
+        this.setState({file: file});
+    }
+
+    closeFile = () => {
+        this.setState({file: null});
     }
 
     render() {
@@ -85,24 +91,44 @@ class Tree extends Component{
         }
 
         const treeDom = tree.tree.map(function (elem) {
-            const {FileComponent, handlerFunction} = elem.type === 'tree' ? {FileComponent: Dir, handlerFunction: self.openDir} : {FileComponent: File, handlerFunction: self.openFile};
             const path = document.createElement('a');
             path.href = elem.url;
 
+            const {FileComponent, handlerFunction} = elem.type === 'tree'
+                ? {FileComponent: Dir, handlerFunction: () => self.openDir(path.pathname)}
+                : {FileComponent: File, handlerFunction: () => self.openFile(elem)};
+
+
             return (
                 <div key={elem.path}>
-                    <a href='#' onClick={() => handlerFunction(path.pathname)}><FileComponent elem={elem}/></a>
+                    <a href='#' onClick={handlerFunction}><FileComponent elem={elem}/></a>
                 </div>)
         })
 
         return (
-            <div className="branch">
-                <a href='#' onClick={self.closeDir}>
-                    <div className="line">
-                        <span>..</span>
-                    </div>
-                </a>
-                {treeDom}
+            <div>
+                {self.state.file
+                    ? <div>
+                        <Row>
+                            <Col lg={12} className="table-list-cell line">
+                                <strong><span>{this.state.file.path}</span></strong>
+                                <button className="btn btn-primary pull-right" onClick={self.closeFile} type="button"><i className="fa fa-close"></i></button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={12} className="table-list-cell line">
+                                <FileOpener url={self.state.file.url}/>
+                            </Col>
+                        </Row>
+                      </div>
+                    : <div>
+                        <a href='#' onClick={self.closeDir}>
+                            <div className="line">
+                                <span>..</span>
+                            </div>
+                        </a>
+                        {treeDom}
+                    </div>}
             </div>
         )
     }

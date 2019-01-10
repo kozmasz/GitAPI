@@ -21,7 +21,6 @@ class CommitList extends Component{
         GitHubAPI.get('/repos/' + this.username + '/' + this.repo + '/commits', { params: { sha: this.branch } })
             .then(res => {
                 this.setState({commits: res.data, isLoading: false});
-                console.log(res.data)
             })
             .catch(error => {
                 this.setState({error, isLoading: false})

@@ -3,7 +3,6 @@ import gitLogo from "../gitLogo.svg";
 import bitbucketLogo from "../bitbucketLogo.svg";
 import {Link} from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
-import Diff from "./github/Diff";
 
 class Welcome extends Component {
 
